@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Django Girls workshop</title>
-    </head>
-    <body>
-        <header>
-            <h1><a href="/">My New journey Blog</a></h1>
-        </header>
-        
-            <article>
-                <time>published: 14.06.2014, 12:14</time>
-                <h2><a href="">My first post</a></h2>
-                <p>Today I am joining with Django girls workshop to make blog from scratch!</p>
-                <p>I am so excited how it works as I have no experience of this kind of things.</p>
-            </article>
+{% extends 'blog/base.html' %}
 
-        <article>
-            <time>published: 14.06.2014, 12:14</time>
-            <h2><a href="">My second post</a></h2>
-            <p>I am trying to get my head around how this blog works. Learnt about github and using PythonAnywhere tool to place this blog on server.</p>
-            <p>PythonAnywhre is a service for running Python code on servers "in the cloud". We'll use it for hosting our site.</p>
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+            <time class="date">
+                {{ post.published_date}}
+            </time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
         </article>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
